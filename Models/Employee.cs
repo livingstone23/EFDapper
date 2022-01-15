@@ -1,4 +1,6 @@
-﻿namespace EFDapper.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace EFDapper.Models
 {
     public class Employee
     {
@@ -8,6 +10,8 @@
         public string Phone { get; set; }
         public string Title { get; set; }
         public int CompanyId { get; set; }
+
+        [ForeignKey("CompanyId")]
         public virtual Company Company { get; set; }
     }
 }

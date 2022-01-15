@@ -46,12 +46,19 @@ namespace EFDapper.Repository
 
         public void Remove(int id)
         {
-            
+            var sql = "DELETE FROM Companies WHERE CompanyId = @Id";
+
+            db.Execute(sql, new { id });
         }
 
         public Company Update(Company company)
         {
-            return null;
+            var sql = "UPDATE Companies SET Name = @Name, Address = @Address, City = @City, " +
+                             "State = @State, PostalCode = @PostalCode WHERE CompanyId = @CompanyId";
+
+            db.Execute(sql, company);
+
+            return company;
         }
     }
 

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EFDapper.Models
 {
@@ -20,6 +21,7 @@ namespace EFDapper.Models
         public string PostalCode { get; set; }
 
         //[Write(false)]
+        [NotMapped]
         public List<Employee> Employees { get; set; }
     }
 
