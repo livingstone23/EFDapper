@@ -1,11 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
+
+using Dapper.Contrib.Extensions;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EFDapper.Models
 {
+    [Dapper.Contrib.Extensions.Table("Companies")]
     public class Company
     {
-        //[Dapper.Contrib.Extensions.Table("Companies")]
+        
         public Company()
         {
             Employees = new List<Employee>();
@@ -20,9 +23,9 @@ namespace EFDapper.Models
         public string State { get; set; }
         public string PostalCode { get; set; }
 
-        //[Write(false)]
-        [NotMapped]
+        [Write(false)]
         public List<Employee> Employees { get; set; }
+
     }
 
 }
