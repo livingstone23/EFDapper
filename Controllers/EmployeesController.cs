@@ -12,16 +12,17 @@ namespace EFDapper.Controllers
 
 
         private readonly IEmployeeRepository _emploRepo;
+        private readonly IBonusRepository _bonRepo;
 
 
         [BindProperty]
         public Employee Employee { get; set; }
 
 
-        public EmployeesController(IEmployeeRepository emploRepo)
+        public EmployeesController(IEmployeeRepository emploRepo, IBonusRepository bonRepo)
         {
             _emploRepo = emploRepo;
-
+            _bonRepo = bonRepo;
         }
 
 
@@ -32,11 +33,22 @@ namespace EFDapper.Controllers
         }
 
 
+        //Metodo con dapper anotations
+        //[HttpGet]
+        //public async Task<List<Employee>> Index()
+        //{
+        //    return _emploRepo.GetAll();
+        //}
+
+
+        //Metodo con _bonusrepository
         [HttpGet]
-        public async Task<List<Employee>> Index()
+        public async Task<List<Employee>> Index(int companyId = 0)
         {
-            return _emploRepo.GetAll();
+            List<Employee> employees = _bonRepo.GetEmployeeWithCompany(companyId);
+            return employees;
         }
+
 
 
         //[HttpPost]

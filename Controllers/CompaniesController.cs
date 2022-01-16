@@ -12,25 +12,54 @@ namespace EFDapper.Controllers
 
 
         private readonly ICompanyRepository _compRepo;
+        private readonly IEmployeeRepository _empRepo;
+        private readonly IBonusRepository _bonRepo;
 
 
-        public CompaniesController(ICompanyRepository compRepo)
+        public CompaniesController( ICompanyRepository compRepo, 
+                                    IEmployeeRepository empRepo, 
+                                    IBonusRepository bonRepo)
         {
             _compRepo = compRepo;
+            _empRepo = empRepo;
+            _bonRepo = bonRepo;
         }
+
+
+        //[HttpGet("{id}")]
+        //public Company GeDetails(int id)
+        //{
+        //    return _compRepo.Find(id);
+        //}
 
 
         [HttpGet("{id}")]
-        public Company GeDetails(int id)
+        public IActionResult GeDetails(int? id)
         {
-            return _compRepo.Find(id);
+            var company = _bonRepo.GetCompanyWithEmployees(id.GetValueOrDefault());
+            if (company == null)
+            {
+                return NoContent();
+            }
+
+            return Ok(company);
         }
 
 
+
+        //[HttpGet]
+        //public async Task<List<Company>> GetAll()
+        //{
+        //    return _compRepo.GetAll();
+        //}
+
+
         [HttpGet]
-        public async Task<List<Company>> GetAll()
+        public IActionResult GetAll(int? id)
         {
-            return _compRepo.GetAll();
+            return Ok(_compRepo.GetAll());
+            
+
         }
 
 

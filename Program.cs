@@ -17,6 +17,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(opciones => opciones.UseSqlS
 
 builder.Services.AddScoped<ICompanyRepository, CompanyRepositoryContrib>();
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+builder.Services.AddScoped<IBonusRepository, BonusRepository>();
 
 
 var app = builder.Build();
